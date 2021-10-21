@@ -1,23 +1,12 @@
 <script context="module">
 	export const prerender = true;
 	
-	import { goto } from '$app/navigation';
 	import { level, module } from '../stores/stores.js';
 
 	const modules = [
 		["A","B","C"], 
 		["A","B"], 
 	];
-
-	function enterModule(mod) {
-		module.set(mod);
-	}
-
-	function enterLevel(module, lev) {
-		level.set(lev);
-		goto(`/${module}-${lev}`);
-	}
-
 </script>
 
 <section>
@@ -28,7 +17,7 @@
 			Choose module: 
 			<ul>
 				{#each modules as mod, index}
-					<li><button on:click={() => enterModule(index + 1)}>Module {index + 1}</button></li>
+					<li><button on:click={() => module.set(index + 1)}>Module {index + 1}</button></li>
 				{/each}
 			</ul>
 		</div>
@@ -39,8 +28,7 @@
 			Choose level for module {$module}: 
 			<ul>
 				{#each modules[$module - 1] as lev}
-					<li><button on:click={() => enterLevel($module, lev)}>Level {lev}</button></li> or 
-					<li><a sveltekit:prefetch href="/{$module}-{$level}" on:click={() => enterLevel($module, lev)}>Level {lev}</a></li>
+					<li><a sveltekit:prefetch href="/{$module}-{$level}">Level {lev}</a></li>
 				{/each}
 			</ul>
 		</div>
