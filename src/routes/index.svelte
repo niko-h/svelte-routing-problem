@@ -39,7 +39,8 @@
 			Choose level for module {$module}: 
 			<ul>
 				{#each modules[$module - 1] as lev}
-					<li><button on:click={() => enterLevel($module, lev)}>Level {lev}</button></li>
+					<li><button on:click={() => enterLevel($module, lev)}>Level {lev}</button></li> or 
+					<li><a sveltekit:prefetch href="/{$module}-{$level}" on:click={() => enterLevel($module, lev)}>Level {lev}</a></li>
 				{/each}
 			</ul>
 		</div>
